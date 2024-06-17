@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    order_sequence = fields.Boolean(string="Order Sequence", readonly=True, index=True)
+    order_sequence = fields.Boolean(readonly=True, index=True)
     quote_id = fields.Many2one(
         comodel_name="sale.order",
         string="Quotation",
@@ -66,7 +66,6 @@ class SaleOrder(models.Model):
             "res_model": "sale.order",
             "context": {"default_order_sequence": True, "order_sequence": True},
             "type": "ir.actions.act_window",
-            "nodestroy": True,
             "target": "current",
             "domain": "[('order_sequence', '=', True)]",
             "res_id": self.order_id and self.order_id.id or False,
